@@ -5,6 +5,7 @@ import process from 'node:process'
 import { expressAppConfig } from 'oas3-tools'
 import { Oas3AppOptions } from 'oas3-tools/dist/middleware/oas3.options'
 import cors from 'cors'
+import logger from './logger'
 
 dotenv.config()
 
@@ -34,4 +35,12 @@ process.on('SIGTERM', () => {
   server.close((err: any) => {
     process.exit(err ? 1 : 0)
   })
+})
+
+process.on('uncaughtException', (error) => {
+  logger.error(`Uncaught exception: ${error}`)
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error(`Unhandled rejection at ${promise}: ${reason}`)
 })
