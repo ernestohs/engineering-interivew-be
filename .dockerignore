@@ -1,0 +1,19 @@
+# Ignore node_modules to ensure fresh installation
+node_modules
+
+# Ignore log files
+*.log
+
+# Ignore Dockerfile and .dockerignore
+Dockerfile
+.dockerignore
+
+# Ignore local environment variables
+.env
+
+# Ignore editor and OS-specific files
+*.swp
+*.swo
+*~
+.vscode
+.DS_Store
