@@ -3,7 +3,7 @@ import { createLogger, format, transports } from 'winston';
 import 'winston-daily-rotate-file';
 /**
  * TODO: Integrate with DataDog
- * @example 
+ * @example
  * import * as ddTransport from 'datadog-winston';
  */
 
@@ -65,7 +65,7 @@ const logger = createLogger({
     format.colorize(),
     timestamp(),
     errors({ stack: true }), // Log the full stack trace
-    logFormat
+    logFormat,
   ),
   transports: getLogTransports(),
   exceptionHandlers: [

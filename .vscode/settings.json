@@ -18,5 +18,23 @@
         "titleBar.inactiveBackground": "#a2f86b99",
         "titleBar.inactiveForeground": "#15202b99"
     },
-    "peacock.remoteColor": "#a2f86b"
-}
+    "peacock.remoteColor": "#a2f86b",
+
+    "files.exclude": {
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/.vscode": true,
+      "**/.DS_Store": true,
+      "**/package-lock.json": true,
+      "**/*.js": {"when": "$(basename).ts"},
+      "**/*.map": {"when": "$(basename).map"}
+    },
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+  }
+  
