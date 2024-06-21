@@ -9,7 +9,7 @@ export interface PaginatedResult<T> {
     if (perPage <= 0) {
       throw new Error('perPage argument must be greater than 0.')
     }
-  
+
     // handle perPage being greater than data length
     perPage = Math.min(perPage, data.length)
   
