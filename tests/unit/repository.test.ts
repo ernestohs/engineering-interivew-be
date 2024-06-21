@@ -1,17 +1,17 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { Repository } from '../src/repositories/Repository';
-import pool from '../src/repositories/postgres';
-import logger from '../src/logger';
-import { Entity } from '../src/repositories/Entity';
+import { Repository } from '../../src/repositories/Repository';
+import pool from '../../src/repositories/postgres';
+import logger from '../../src/logger';
+import { Entity } from '../../src/repositories/Entity';
 
 // Mocking pool and logger
-vi.mock('../src/repositories/postgres', () => ({
+vi.mock('../../src/repositories/postgres', () => ({
   default: {
     connect: vi.fn(),
   },
 }));
 
-vi.mock('../src/logger', () => ({
+vi.mock('../../src/logger', () => ({
   default: {
     error: vi.fn(),
   },
@@ -27,7 +27,7 @@ describe('Repository', () => {
   let repository: Repository<Entity>;
 
   beforeEach(() => {
-    repository = new Repository<Entity>('test_table', ['id', 'name']);
+    repository = new Repository<Entity>('test_table');
     (pool.connect as vi.Mock).mockResolvedValue(mockClient);
     mockClient.query.mockReset();
     mockClient.release.mockReset();
@@ -54,7 +54,7 @@ describe('Repository', () => {
     const entity = { id: '1', name: 'Test Entity' };
     mockClient.query.mockResolvedValueOnce({ rows: [entity] });
 
-    const result = await repository.findById('1');
+    const result = await repository.findById<Entity>('1');
 
     expect(mockClient.query).toHaveBeenCalledWith(
       `SELECT * FROM test_table WHERE id = $1`,
@@ -115,7 +115,7 @@ describe('Repository', () => {
     const error = new Error('Test error');
     mockClient.query.mockRejectedValueOnce(error);
 
-    await repository.findById('1');
+    await repository.findById<Entity>('1');
 
     expect(logger.error).toHaveBeenCalledWith(error);
   });

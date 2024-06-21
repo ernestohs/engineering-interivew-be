@@ -11,17 +11,12 @@
  */
 
 
-export interface Task { 
-    id: string;
+export interface TaskCreate { 
     title: string;
     description?: string;
-    status: Task.StatusEnum;
-    createdAt: string;
-    createdBy: string;
-    updatedAt: string;
-    updatedBy: string;
+    status: TaskCreate.StatusEnum;
 }
-export namespace Task {
+export namespace TaskCreate {
     export type StatusEnum = 'To do' | 'In Progress' | 'Done' | 'Archived';
     export const StatusEnum = {
         ToDo: 'To do' as StatusEnum,

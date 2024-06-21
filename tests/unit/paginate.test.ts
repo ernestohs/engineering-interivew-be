@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { paginate, PaginatedResult } from '../src/server/paginate';
+import { paginate, PaginatedResult } from '../../src/server/paginate';
 
 describe('paginate', () => {
   it('should paginate correctly when perPage is greater than data length', () => {

@@ -14,4 +14,6 @@ export * from './paginated';
 export * from './reportsReportSummary200Response';
 export * from './responseModel';
 export * from './task';
+export * from './taskCreate'
+export * from './taskUpdate'
 export * from './tasksResponse';

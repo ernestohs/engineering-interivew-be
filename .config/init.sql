@@ -14,3 +14,14 @@ CREATE TABLE tasks (
   updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updatedBy VARCHAR(255) NOT NULL
 );
+
+-- Reports
+
+CREATE VIEW summary_report AS
+SELECT
+  COUNT(*) AS total,
+  SUM(CASE WHEN status = 'toDo' THEN 1 ELSE 0 END) AS TODO,
+  SUM(CASE WHEN status = 'inProgress' THEN 1 ELSE 0 END) AS IN_PROGRESS,
+  SUM(CASE WHEN status = 'done' THEN 1 ELSE 0 END) AS DONE,
+  SUM(CASE WHEN status = 'archived' THEN 1 ELSE 0 END) AS ARCHIVED
+FROM tasks;

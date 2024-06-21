@@ -64,9 +64,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Task"
+                $ref: "#/components/schemas/TasksResponse"
       tags:
         - Tasks
     post:
@@ -77,7 +75,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Task"
+              $ref: "#/components/schemas/TaskCreate"
       responses:
         "201":
           description: Task created
@@ -108,7 +106,7 @@ paths:
           description: Task not found
       tags:
         - Tasks
-    put:
+    patch:
       summary: Update a task by ID
       operationId: tasks_updateTasks
       parameters:
@@ -122,7 +120,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Task"
+              $ref: "#/components/schemas/TaskUpdate"
       responses:
         "200":
           description: Task updated
@@ -382,6 +380,43 @@ components:
         - $ref: '#/components/schemas/ErrorResponse'
       title: Service Unavailable Error Response
     # Models
+    TaskCreate:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Sample Task"
+        description:
+          type: string
+          example: "This is a sample task description."
+        status:
+          type: string
+          enum:
+            - To do
+            - In Progress
+            - Done
+            - Archived
+          example: "To do"
+      required:
+        - title
+        - status
+    TaskUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Sample Task"
+        description:
+          type: string
+          example: "This is a sample task description."
+        status:
+          type: string
+          enum:
+            - To do
+            - In Progress
+            - Done
+            - Archived
+          example: "To do"
     Task:
       allOf:
         - $ref: '#/components/schemas/Audited'
@@ -408,6 +443,7 @@ components:
       required:
         - title
         - status
+        - id
     TasksResponse:
       allOf:
         - $ref: '#/components/schemas/Paginated'

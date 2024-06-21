@@ -6,10 +6,11 @@
     "start": "ts-node ./src/index.ts",
     "start:debug": "npx ts-node-dev  --files --transpile-only --respawn --inspect-brk --project tsconfig.json src/index.ts",
     "format": "prettier --write ./src",
-    "test": "vitest",
-    "test:debug": "vitest run --inspect-brk --no-threads",
-    "up": "docker-compose up",
-    "down": "docker-compose down"
+    "test": "vitest --config vitest.unit.config.ts",
+    "test:debug": "vitest --config vitest.unit.config.ts run --inspect-brk --no-threads",
+    "e2e": "vitest --config vitest.e2e.config.ts",
+    "up": "docker-compose up -d",
+    "down": "docker-compose down "
   },
   "keywords": [
     "swagger"
@@ -21,35 +22,38 @@
   },
   "dependencies": {
     "@types/morgan": "^1.9.9",
-    "connect": "^3.2.0",
+    "axios": "^1.7.2",
+    "connect": "^3.7.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.31.2",
-    "express": "^4.18.2",
-    "js-yaml": "^3.3.0",
+    "express": "^4.19.2",
+    "js-yaml": "^4.1.0",
     "morgan": "^1.10.0",
     "morgan-body": "^2.6.9",
     "oas3-tools": "^2.2.3",
     "pg": "^8.12.0",
     "pg-pool": "^3.6.2",
+    "playwright": "^1.44.1",
     "uuid": "^10.0.0",
     "winston": "^3.13.0",
     "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.19.2",
-    "@types/cors": "^2.8.14",
-    "@types/express": "^4.17.19",
+    "@playwright/test": "^1.44.1",
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.8",
     "@types/pg": "^8.11.6",
-    "@types/uuid": "^9.0.8",
+    "@types/uuid": "^10.0.0",
     "jest": "^29.7.0",
-    "prettier": "^3.0.3",
+    "prettier": "^3.3.2",
     "ts-jest": "^29.1.5",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.2.2",
-    "vitest": "^0.34.5"
+    "typescript": "^5.5.2",
+    "vitest": "^1.6.0"
   }
 }

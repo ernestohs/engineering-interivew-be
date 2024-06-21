@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { createNewTasks, deleteTask, findTaskById, getTaskList, updateTask } from "../service/TaskService";
 import { responseHandler, errorResponseHandler, getItemResponseHandler, createResponseHandler } from "../server/respondWithCode";
-import { Task, TasksResponse } from "../models";
+import { Task, TaskUpdate, TasksResponse } from "../models";
 
 export function getTasks(req: Request, res: Response, next: NextFunction,
   field: string | undefined,
@@ -26,7 +26,7 @@ export function getTasksById(req: Request, res: Response, next: NextFunction, ta
   .catch(errorResponseHandler(res))
 }
 
-export function updateTasks(req: Request, res: Response, next: NextFunction, taskId: string): void {
+export function updateTasks(req: Request, res: Response, next: NextFunction, model:TaskUpdate, taskId: string): void {
   updateTask(taskId, req.body)
   .then(getItemResponseHandler<Task>(res))
   .catch(errorResponseHandler(res))

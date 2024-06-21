@@ -4,10 +4,8 @@ import pool from './postgres';
 
 export class Repository<T extends Entity> {
     tableName: string;
-    fields: Array<string>;
-    constructor(name: string, fields: Array<string>) {
+    constructor(name: string) {
         this.tableName = name;
-        this.fields = fields;
     }
 
     async create(entity: T): Promise<T> {
@@ -27,7 +25,7 @@ export class Repository<T extends Entity> {
         }
     }
 
-    async findById(id: string): Promise<T> {
+    async findById<T>(id: string): Promise<T> {
         let payload: any
         const client = await pool.connect();
         try {
@@ -76,10 +74,10 @@ export class Repository<T extends Entity> {
         let payload: any = {}
         const client = await pool.connect();
         try {
+            const fields = Object.keys(entity);
             // Build the SET clause with entity fields
-            const setClause = this.fields.map((field, index) => `${field} = $${index + 1}`).join(',');
-
-            const statement = `UPDATE ${this.tableName} SET ${setClause} WHERE id = $${this.fields.length + 1}`;
+            const setClause = fields.map((field, index) => `${field} = $${index + 1}`).join(',');
+            const statement = `UPDATE ${this.tableName} SET ${setClause} WHERE id = $${fields.length + 1}`;
             const values = [...Object.values(entity), id]; // Include id for WHERE clause
 
             const result = await client.query(statement, values);
